@@ -2,8 +2,9 @@
 {
     public enum BrowserType
     {
-        chrome,
-        fireFox,
-        ie
+        Chrome,
+        FireFox,
+        InternetExplorer,
+        remote
     }
 }

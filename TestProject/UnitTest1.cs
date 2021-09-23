@@ -1,12 +1,14 @@
 using NUnit.Framework;
+using PageObjectProject.Hooks;
 
 namespace TestProject
 {
-    public class Tests
+    public class Tests : Hook
     {
         [SetUp]
         public void Setup()
         {
+
         }
 
         [Test]

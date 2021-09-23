@@ -30,6 +30,7 @@ namespace BaseProject.IDrivers
             driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(10);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(int.Parse(Configuration.pageLoadWaitTime));
             driver.Navigate().GoToUrl(Configuration.BaseUrl);
+            driver.Manage().Cookies.DeleteAllCookies();
             Driver = driver;
         }
     }

@@ -11,7 +11,7 @@ namespace BaseProject.JsonReader
         public static string GetJsonValue(string key)
         {
             var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var builder = new ConfigurationBuilder().SetBasePath(path).AddJsonFile("appConfig.json").Build();
+            var builder = new ConfigurationBuilder().SetBasePath(path).AddJsonFile("ConfigFiles/appConfig.json").Build();
 
             string value = builder[key];
 

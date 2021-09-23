@@ -1,33 +1,33 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.IE;
 using System;
 
 namespace BaseProject.IDrivers
 {
-    public class FireFoxDriverWeb : IDrivers
+    public class InternetExplorerDriverWeb
     {
-
         public object Driver
         {
-            get;set;
+            get; set;
         }
 
         public object DesiredCapabilities
         {
             get
             {
-                FirefoxOptions option = new();
-                option.AddArgument("no-sandbox");
-                option.AddArgument("--start-maximized");
-                option.PageLoadStrategy = PageLoadStrategy.Eager;
-                option.AcceptInsecureCertificates = true;
+                InternetExplorerOptions option = new InternetExplorerOptions();
+                option.EnsureCleanSession = true;
+                option.RequireWindowFocus = false;
+                option.IgnoreZoomLevel = false;
+                option.IntroduceInstabilityByIgnoringProtectedModeSettings = false;
+                option.ElementScrollBehavior = InternetExplorerElementScrollBehavior.Top;
                 return option;
             }
         }
 
         public void InitDriver()
         {
-            IWebDriver driver = new FirefoxDriver((FirefoxOptions)DesiredCapabilities);
+            IWebDriver driver = new InternetExplorerDriver((InternetExplorerOptions)DesiredCapabilities);
             driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(10);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(int.Parse(Configuration.pageLoadWaitTime));
             driver.Navigate().GoToUrl(Configuration.BaseUrl);
