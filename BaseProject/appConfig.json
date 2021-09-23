@@ -1,0 +1,10 @@
+{
+  "BaseUrl": "https://cybr20200827202321.azurewebsites.net/",
+  "ApplicationName": "",
+  "Version": "",
+  "Environment": "",
+  "PageLoad": "60",
+  "ElementWaitTime": "10",
+  "RemoteWebdriverWait": "60",
+  "HubIpAddress": ""
+}
