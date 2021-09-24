@@ -17,7 +17,6 @@ namespace BaseProject.IDrivers
             get
             {
                 FirefoxOptions option = new();
-                option.AddArgument("no-sandbox");
                 option.AddArgument("--start-maximized");
                 option.PageLoadStrategy = PageLoadStrategy.Eager;
                 option.AcceptInsecureCertificates = true;

@@ -9,5 +9,6 @@ namespace BaseProject.IDrivers
         public static string remoteWebDriverWaitTime = JsonConfig.GetJsonValue("RemoteWebdriverWait");
         public static string hubIpAddress = JsonConfig.GetJsonValue("HubIpAddress"); 
         public static string BaseUrl = JsonConfig.GetJsonValue("BaseUrl");
+        public static string BrowserType = JsonConfig.GetJsonValue("BrowserType");
     }
 }

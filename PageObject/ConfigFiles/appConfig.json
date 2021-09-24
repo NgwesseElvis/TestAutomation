@@ -6,5 +6,6 @@
   "PageLoad": "60",
   "ElementWaitTime": "10",
   "RemoteWebdriverWait": "60",
-  "HubIpAddress": ""
+  "HubIpAddress": "",
+  "BrowserType": "chrome"
 }

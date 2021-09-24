@@ -1,6 +1,7 @@
-﻿using BaseProject.DriverFactory;
+﻿using BaseProject.Factory;
 using BaseProject.IDrivers;
 using NUnit.Framework;
+using PageObjectProject.IOC;
 
 namespace PageObjectProject.Hooks
 {
@@ -9,7 +10,8 @@ namespace PageObjectProject.Hooks
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            InitDriver(BrowserType.Chrome);
+            ResolveDependency.RegisterAndResolveDependencies();
+            InitDriver();
         }
 
         [OneTimeTearDown]

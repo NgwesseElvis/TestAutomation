@@ -1,8 +1,10 @@
 ﻿using BaseProject.IDrivers;
 using OpenQA.Selenium;
+using System;
+using System.Diagnostics;
 using System.Threading;
 
-namespace BaseProject.DriverFactory
+namespace BaseProject.Factory
 {
     public class DriverFactory
     {
@@ -29,29 +31,30 @@ namespace BaseProject.DriverFactory
             }
         }
 
-        public static void InitDriver(BrowserType browser)
+        public static void InitDriver()
         {
-            switch (browser)
+            var browserType = Configuration.BrowserType.ToLower();
+            switch (browserType)
             {
-                case BrowserType.Chrome:
+                case "chrome":
                     ChromeDriverWeb chrmoedriverInstance = new();
                     chrmoedriverInstance.InitDriver();
                     DriverStored = chrmoedriverInstance.Driver;
                     break;
 
-                case BrowserType.FireFox:
+                case "firefox":
                     FireFoxDriverWeb firefoxdriverInstance = new();
                     firefoxdriverInstance.InitDriver();
                     DriverStored = firefoxdriverInstance.Driver;
                     break;
 
-                case BrowserType.InternetExplorer:
+                case "ie":
                     InternetExplorerDriverWeb iedriverInstance = new();
                     iedriverInstance.InitDriver();
                     DriverStored = iedriverInstance.Driver;
                     break;
 
-                case BrowserType.remote:
+                case "remote":
                     RemoteChromeDriverWeb remoteChrmoedriverInstance = new();
                     remoteChrmoedriverInstance.InitDriver();
                     DriverStored = remoteChrmoedriverInstance.Driver;
@@ -64,8 +67,37 @@ namespace BaseProject.DriverFactory
         public static void CloseDriver()
         {
             IWebDriver driver = (IWebDriver)DriverStored;
-            driver.Quit();
-            DriverStored = null;
+            try
+            {
+                driver.Close();
+                driver.Quit();
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+            }
+            finally
+            {
+                KillBrowser();
+                DriverStored = null;
+            }
+        }
+
+        private static void KillBrowser()
+        {
+            Process[] AllProcesses = Process.GetProcesses();
+            foreach (var process in AllProcesses)
+            {
+                if (process.MainWindowTitle != "")
+                {
+                    string s = process.ProcessName.ToLower();
+                    if (s == "iexplore" || s == "edge" || s == "chrome" || s == "firefox")
+                        //process.Container.Dispose();
+                        process.Kill();
+                    process.Close();
+                    process.Dispose();
+                }
+            }
         }
     }
 }
