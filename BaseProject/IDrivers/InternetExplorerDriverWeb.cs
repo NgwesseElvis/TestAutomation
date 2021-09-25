@@ -18,7 +18,8 @@ namespace BaseProject.IDrivers
                 InternetExplorerOptions option = new InternetExplorerOptions();
                 option.EnsureCleanSession = true;
                 option.RequireWindowFocus = false;
-                option.IgnoreZoomLevel = false;
+                option.IgnoreZoomLevel = true;
+                option.PageLoadStrategy = PageLoadStrategy.Eager;
                 option.IntroduceInstabilityByIgnoringProtectedModeSettings = false;
                 option.ElementScrollBehavior = InternetExplorerElementScrollBehavior.Top;
                 return option;
@@ -31,6 +32,7 @@ namespace BaseProject.IDrivers
             driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(10);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(int.Parse(Configuration.pageLoadWaitTime));
             driver.Navigate().GoToUrl(Configuration.BaseUrl);
+            driver.Manage().Window.Maximize();
             driver.Manage().Cookies.DeleteAllCookies();
             Driver = driver;
         }

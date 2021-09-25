@@ -18,7 +18,7 @@ namespace BaseProject.IDrivers
                 ChromeOptions option = new();
                 option.AddArgument("no-sandbox");
                 option.AddArgument("--start-maximized");
-                option.PageLoadStrategy = OpenQA.Selenium.PageLoadStrategy.Eager;
+                option.PageLoadStrategy = PageLoadStrategy.Eager;
                 option.AcceptInsecureCertificates = true;
                 return option;
             }
