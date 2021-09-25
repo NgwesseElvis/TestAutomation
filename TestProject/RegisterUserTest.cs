@@ -43,6 +43,7 @@ namespace TestProject
             var result = _confirmRegisterPage.GetPageTitel();
             var titel = "Register";
             Assert.AreEqual(result,titel);
+
         }
     }
 }
