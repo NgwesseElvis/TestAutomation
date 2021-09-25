@@ -22,7 +22,7 @@ namespace PageObjectProject.IOC
             UnityWrapper.Register<ILogoutPage, LogoutPage>();
             UnityWrapper.Register<IRegisterationPage, RegisterationPage>();
             UnityWrapper.Register<IConfirmRegisterPage, ConfirmRegisterPage>();
-
+            UnityWrapper.Register<ISearchResults, SearchResults>();
         }
     }
 }

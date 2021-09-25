@@ -8,6 +8,7 @@ namespace PageObjectProject.Pages
     {
         private static readonly string pageName = "Home Page";
         private static readonly By warShipImage = By.CssSelector("div>img");
+        private static readonly By searchField = By.CssSelector("form>input[name='search']");
 
         public HomePage():base(pageName,warShipImage)
         {
@@ -30,13 +31,6 @@ namespace PageObjectProject.Pages
         public T ClickOnLoginLink<T>() where T : class
         {
             var locator = By.CssSelector("li>a[href*='Login']");
-            ClickOnElement(locator);
-            return GetPage<T>();
-        }
-
-        public T ClickOnPrivacyLink<T>() where T : class
-        {
-            var locator = By.CssSelector("div>a[href*='Privacy']");
             ClickOnElement(locator);
             return GetPage<T>();
         }
@@ -68,10 +62,15 @@ namespace PageObjectProject.Pages
             return titel;
         }
 
+        public T PressEnter<T>() where T : class
+        {
+            PressEnter(searchField);
+            return GetPage<T>();
+        }
+
         public void Search(string text)
         {
-            var locator = By.CssSelector("form>input[name='search']");
-            EnterText(locator,text);
+            EnterText(searchField,text);
         }
 
         public bool VerifyElementContainsText(string text)

@@ -8,7 +8,7 @@ namespace TestProject
 {
     [TestFixture()]
     [Parallelizable]
-    public class RegisterUser : Hook
+    public class RegisterUserTest : Hook
     {
         private IHomePage _homePage;
         private ILoginPage _loginPage;

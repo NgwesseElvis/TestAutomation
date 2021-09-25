@@ -26,10 +26,6 @@ namespace BaseProject.BaseClass
                 }
 
             }
-            finally
-            {
-                // Report to user unable to click
-            }
         }
 
         public void ClickOnElement(By by)
@@ -45,10 +41,6 @@ namespace BaseProject.BaseClass
                 ScrollToView(element);
                 HighlightElement(element);
                 element.Click();
-            }
-            finally
-            {
-                // Report to user unable to click
             }
         }
 
@@ -108,6 +100,22 @@ namespace BaseProject.BaseClass
             var jsDriver = (IJavaScriptExecutor)Driver;
             string highlightJavascript = @"$(arguments[0]).css({ ""border-width"" : ""2px"", ""border-style"" : ""solid"", ""border-color"" : ""red"", ""background"" : ""yellow"" });";
             jsDriver.ExecuteScript(highlightJavascript, new object[] { element });
+        }
+
+        public void PressEnter(By by)
+        {
+            var element = Driver.FindElement(by);
+            try
+            {
+                HighlightElement(element);
+                element.SendKeys(Keys.Enter);
+            }
+            catch (Exception)
+            {
+                ScrollToView(element);
+                HighlightElement(element);
+                element.SendKeys(Keys.Enter);
+            }
         }
     }
 }

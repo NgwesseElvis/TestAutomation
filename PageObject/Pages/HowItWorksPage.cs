@@ -52,5 +52,12 @@ namespace PageObjectProject.Pages
             var boolResults = IsElementDisplayed(locator);
             return boolResults;
         }
+
+        public T ClickOnPrivacyLink<T>() where T : class
+        {
+            var locator = By.CssSelector("div>a[href*='Privacy']");
+            ClickOnElement(locator);
+            return GetPage<T>();
+        }
     }
 }

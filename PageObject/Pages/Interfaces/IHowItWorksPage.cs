@@ -4,6 +4,7 @@
     {
         T ClickOnHomeLink<T>() where T : class;
         T ClickOnBlogLink<T>() where T : class;
+        T ClickOnPrivacyLink<T>() where T : class;
         string GetPageTitel();
         bool VerifyMachineLearningTextDisplayed();
         bool VerifyTensorAcceleratedTextDisplayed();
