@@ -14,6 +14,12 @@ namespace TestProject
         private ILoginPage _loginPage;
         private IAccountPage _accountPage;
         private ILogoutPage _logoutPage;
+        private static readonly string TestName = "Login user";
+
+        public LoginUserTest() : base(TestName)
+        {
+
+        }
 
         [OneTimeSetUp]
         public void Setup()

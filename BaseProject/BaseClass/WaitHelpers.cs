@@ -6,7 +6,7 @@ namespace BaseProject.BaseClass
 {
     public abstract partial class BaseClass
     {
-        public static bool WaitTillElementSelected(By by, int timeout = 10)
+        public bool WaitTillElementSelected(By by, int timeout = 10)
         {
             var boolResults = false;
 
@@ -17,14 +17,13 @@ namespace BaseProject.BaseClass
             }
             catch (Exception e)
             {
-                // Report
-                Console.Write(e.Message);
+                Fail($"{e.Message}");
             }
 
             return boolResults;
         }
 
-        public static bool WaitTillElementEnabled(By by, int timeout = 10)
+        public bool WaitTillElementEnabled(By by, int timeout = 10)
         {
             var boolResults = false;
 
@@ -35,14 +34,13 @@ namespace BaseProject.BaseClass
             }
             catch (Exception e)
             {
-                // Report
-                Console.Write(e.Message);
+                Fail($"{e.Message}");
             }
 
             return boolResults;
         }
 
-        public static bool WaitTillElementContainsString(By by, string text, int timeout = 10)
+        public bool WaitTillElementContainsString(By by, string text, int timeout = 10)
         {
             var boolResults = false;
 
@@ -53,14 +51,13 @@ namespace BaseProject.BaseClass
             }
             catch (Exception e)
             {
-                // Report
-                Console.Write(e.Message);
+                Fail($"{e.Message}");
             }
 
             return boolResults;
         }
 
-        public static bool WaitTillElementIsDisplayed(By by, int timeout = 10)
+        public bool WaitTillElementIsDisplayed(By by, int timeout = 10)
         {
             var boolResults = false;
 
@@ -71,14 +68,13 @@ namespace BaseProject.BaseClass
             }
             catch (Exception e)
             {
-                // Report
-                Console.Write(e.Message);
+                Fail($"{e.Message}");
             }
 
             return boolResults;
         }
 
-        public static bool WaitUntillPageFullyLoaded(int timeout = 10)
+        public bool WaitUntillPageFullyLoaded(int timeout = 10)
         {
             var boolResults = false;
             var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(timeout));
@@ -89,14 +85,13 @@ namespace BaseProject.BaseClass
             }
             catch (Exception e)
             {
-                // Report
-                Console.Write(e.Message);
+                Fail($"{e.Message}");
             }
 
             return boolResults;
         }
 
-        public static void ExecuteJavaScript(string executionText, object obj)
+        public void ExecuteJavaScript(string executionText, object obj)
         {
             IJavaScriptExecutor js = (IJavaScriptExecutor)Driver;
             js.ExecuteScript(executionText, obj);

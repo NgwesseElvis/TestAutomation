@@ -1,10 +1,10 @@
-﻿using BaseProject.Factory;
+﻿using BaseProject.Reporting;
 using OpenQA.Selenium;
 using System;
 
 namespace BaseProject.BaseClass
 {
-    public abstract partial class BaseClass: DriverFactory
+    public abstract partial class BaseClass: BaseReport
     {
         private readonly string _pageName;
         private readonly By _by;
@@ -22,8 +22,7 @@ namespace BaseProject.BaseClass
             var boolResults = WaitTillElementIsDisplayed(_by);
             if (!boolResults)
             {
-                // Report with page name
-                Console.WriteLine($"Unable to to navigate to: {_pageName}");
+                Fail($"Unable to to navigate to: {_pageName}");
                 return false;
             }
             return true;

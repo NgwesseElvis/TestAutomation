@@ -12,6 +12,12 @@ namespace TestProject
     {
         private IHomePage _homePage;
         private IHowItWorksPage _howItWorksPage;
+        private static readonly string TestName = "Verify Machine Learning link";
+
+        public MachineLearningTest() : base(TestName)
+        {
+
+        }
 
         [OneTimeSetUp]
         public void Setup()

@@ -14,6 +14,12 @@ namespace TestProject
         private ILoginPage _loginPage;
         private IRegisterationPage _registerationPage;
         private IConfirmRegisterPage _confirmRegisterPage;
+        private static readonly string TestName = "Register new user";
+
+        public RegisterUserTest() : base(TestName)
+        {
+
+        }
 
         [OneTimeSetUp]
         public void Setup()

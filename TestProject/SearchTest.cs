@@ -13,7 +13,12 @@ namespace TestProject
         private IHomePage _homePage;
         private ISearchResults _searchResults;
         private readonly string searchText = "Europe";
+        private static readonly string TestName = "Search text";
 
+        public SearchTest() : base(TestName)
+        {
+
+        }
 
         [OneTimeSetUp]
         public void Setup()

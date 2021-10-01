@@ -14,6 +14,7 @@ namespace BaseProject.BaseClass
                 HighlightElement(element);
                 element.Clear();
                 element.SendKeys(text);
+                Info($"Successfully entered text on element {by}");
             }
             catch (Exception)
             {
@@ -24,7 +25,7 @@ namespace BaseProject.BaseClass
                 {
                     element.SendKeys(item.ToString());
                 }
-
+                Info($"Successfully entered text on element {by}");
             }
         }
 
@@ -35,12 +36,14 @@ namespace BaseProject.BaseClass
             {
                 HighlightElement(element);
                 element.Click();
+                Info($"Successfully clicked element {by}");
             }
             catch (Exception)
             {
                 ScrollToView(element);
                 HighlightElement(element);
                 element.Click();
+                Info($"Successfully clicked element {by}");
             }
         }
 
@@ -52,16 +55,14 @@ namespace BaseProject.BaseClass
             {
                 HighlightElement(element);
                 JavaScriptClick(element);
+                Info($"Successfully clicked element {by}");
             }
             catch (Exception)
             {
                 ScrollToView(element);
                 HighlightElement(element);
                 JavaScriptClick(element);
-            }
-            finally
-            {
-                // Report to user unable to click
+                Info($"Successfully clicked element {by}");
             }
         }
 
@@ -72,11 +73,11 @@ namespace BaseProject.BaseClass
                 HighlightElement(element);
                 IJavaScriptExecutor executor = (IJavaScriptExecutor)Driver;
                 executor.ExecuteScript("arguments[0].click();", element);
+                Info($"Successfully clicked element");
             }
             catch (Exception e)
             {
-                // Report
-                Console.Write(e.Message);
+                Fail($"{e.Message}");
             }
         }
 
@@ -90,8 +91,7 @@ namespace BaseProject.BaseClass
             }
             catch (Exception e)
             {
-                // Report
-                Console.Write(e.Message);
+                Fail($"{e.Message}");
             }
         }
 
@@ -100,6 +100,8 @@ namespace BaseProject.BaseClass
             var jsDriver = (IJavaScriptExecutor)Driver;
             string highlightJavascript = @"$(arguments[0]).css({ ""border-width"" : ""2px"", ""border-style"" : ""solid"", ""border-color"" : ""red"", ""background"" : ""yellow"" });";
             jsDriver.ExecuteScript(highlightJavascript, new object[] { element });
+
+            Info($"Successfully highlighted element");
         }
 
         public void PressEnter(By by)
@@ -109,12 +111,14 @@ namespace BaseProject.BaseClass
             {
                 HighlightElement(element);
                 element.SendKeys(Keys.Enter);
+                Info($"Successfully hit enter key on element {by}");
             }
             catch (Exception)
             {
                 ScrollToView(element);
                 HighlightElement(element);
                 element.SendKeys(Keys.Enter);
+                Info($"Successfully hit enter key on element {by}");
             }
         }
     }

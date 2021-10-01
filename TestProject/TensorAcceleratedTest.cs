@@ -13,6 +13,12 @@ namespace TestProject
         private IHomePage _homePage;
         private IHowItWorksPage _howItWorksPage;
         private IBlog _blog;
+        private static readonly string TestName = "Verify Tensor Accelerated link";
+
+        public TensorAcceleratedTest() : base(TestName)
+        {
+
+        }
 
         [OneTimeSetUp]
         public void Setup()

@@ -12,6 +12,12 @@ namespace TestProject
     {
         private IHomePage _homePage;
         private ILoginPage _loginPage;
+        private static readonly string TestName = "Invalid user Login";
+
+        public InvalidLoginUserTest() : base(TestName)
+        {
+
+        }
 
         [OneTimeSetUp]
         public void Setup()

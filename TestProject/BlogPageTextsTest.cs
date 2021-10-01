@@ -13,6 +13,13 @@ namespace TestProject
         private IHomePage _homePage;
         private IBlog _blog;
         private ILoginPage _loginPage;
+        private static readonly string TestName = "Verify Blog Page Texts";
+
+        public BlogPageTextsTest() : base(TestName)
+        {
+
+        }
+        
 
         [OneTimeSetUp]
         public void Setup()

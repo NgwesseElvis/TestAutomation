@@ -13,6 +13,12 @@ namespace TestProject
         private IHomePage _homePage;
         private IHowItWorksPage _howItWorksPage;
         private IPrivacy _privacy;
+        private static readonly string TestName = "Verify The BlockChain link";
+
+        public TheBlockChainTest() : base(TestName)
+        {
+
+        }
 
         [OneTimeSetUp]
         public void Setup()
