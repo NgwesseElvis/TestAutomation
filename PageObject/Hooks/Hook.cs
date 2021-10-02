@@ -26,9 +26,9 @@ namespace PageObjectProject.Hooks
         [OneTimeTearDown]
         public void OneTimeTearDown()
         {
-            CloseDriver();
             Info("Closing Browser");
             FlushTest();
+            CloseDriver();
         }
     }
 }

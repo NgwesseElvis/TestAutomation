@@ -2,6 +2,7 @@
 using AventStack.ExtentReports.Reporter;
 using BaseProject.Config;
 using BaseProject.Factory;
+using System.Threading;
 
 namespace BaseProject.Reporting
 {
@@ -9,29 +10,36 @@ namespace BaseProject.Reporting
     {
         
         private static ExtentReports extent;
-        private static ExtentTest testCreated;
+        private static ExtentTest test;
         private static ExtentHtmlReporter htmlReporter;
-        private static object locker = new object();
+        private static ThreadLocal<ExtentTest> _threadLocal = new ThreadLocal<ExtentTest>();
+
+        public static ExtentTest getExtentTest
+        {
+            get
+            {
+                return _threadLocal.Value;
+            }
+            set
+            {
+                _threadLocal.Value = value;
+            }
+        }
 
         public static void CreateTest(string name)
         {
             extent = new ExtentReports();
             CreateReport();
-
-            lock (locker)
-            {
-                testCreated = extent.CreateTest(name);
-            }
-           
+            test = extent.CreateTest(name);
+            getExtentTest = test;
             var startTime = extent.ReportStartDateTime;
-            testCreated.Info($"Test Started at : {startTime}");
+            getExtentTest.Info($"Test Started at : {startTime}");
         }
 
         private static void CreateReport()
         {
-            var path = FilePath.GetFilePathFromDirectory();
-            htmlReporter = new ExtentHtmlReporter(@"C:\\Users\\ajang\\Desktop\\Repositories\\TestAutomation\\BaseProject\\Reporting\\index.html");
-            //htmlReporter = new ExtentHtmlReporter(path);
+            var path = $@"{FilePath.GetFilePathFromDirectory()}";
+            htmlReporter = new ExtentHtmlReporter(path);
             extent.AttachReporter(htmlReporter);
             extent.AddSystemInfo("Host Name", "Testing");
             extent.AddSystemInfo("Environment", "Test Environment");
@@ -48,28 +56,28 @@ namespace BaseProject.Reporting
 
         public static void Skip(string message)
         {
-            testCreated.Log(Status.Skip, message);
+            getExtentTest.Log(Status.Skip, message);
         }
 
         public static void Warning(string message)
         {
-            testCreated.Log(Status.Warning, message);
+            getExtentTest.Log(Status.Warning, message);
         }
 
         public static void Fail(string message)
         {
-            testCreated.Log(Status.Fail, message);
+            getExtentTest.Log(Status.Fail, message);
             ScreenShort.TakeScreenShot(message);
         }
 
         public static void Info(string message)
         {
-            testCreated.Log(Status.Info, message);
+            getExtentTest.Log(Status.Info, message);
         }
 
         public static void Pass(string message)
         {
-            testCreated.Log(Status.Pass,message);
+            getExtentTest.Log(Status.Pass,message);
         }
     }
 }

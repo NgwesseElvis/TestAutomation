@@ -27,10 +27,4 @@
     </Compile>
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="Reporting\ExtentReport.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>
