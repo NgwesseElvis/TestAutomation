@@ -8,15 +8,15 @@ namespace BaseProject.Factory
 {
     public class DriverFactory
     {
-        private static readonly ThreadLocal<object> storedDriver = new();
+        private static readonly ThreadLocal<IWebDriver> storedDriver = new();
 
 
-        public static DriverType GetDriver<DriverType>()
+        public static IWebDriver GetDriver()
         {
-            return (DriverType)DriverStored;
+            return DriverStored;
         }
 
-        public static object DriverStored
+        public static IWebDriver DriverStored
         {
             get
             {
@@ -39,25 +39,25 @@ namespace BaseProject.Factory
                 case "chrome":
                     ChromeDriverWeb chrmoedriverInstance = new();
                     chrmoedriverInstance.InitDriver();
-                    DriverStored = chrmoedriverInstance.Driver;
+                    DriverStored = (IWebDriver)chrmoedriverInstance.Driver;
                     break;
 
                 case "firefox":
                     FireFoxDriverWeb firefoxdriverInstance = new();
                     firefoxdriverInstance.InitDriver();
-                    DriverStored = firefoxdriverInstance.Driver;
+                    DriverStored = (IWebDriver)firefoxdriverInstance.Driver;
                     break;
 
                 case "ie":
                     InternetExplorerDriverWeb iedriverInstance = new();
                     iedriverInstance.InitDriver();
-                    DriverStored = iedriverInstance.Driver;
+                    DriverStored = (IWebDriver)iedriverInstance.Driver;
                     break;
 
                 case "remote":
                     RemoteChromeDriverWeb remoteChrmoedriverInstance = new();
                     remoteChrmoedriverInstance.InitDriver();
-                    DriverStored = remoteChrmoedriverInstance.Driver;
+                    DriverStored = (IWebDriver)remoteChrmoedriverInstance.Driver;
 
                     break;
             }
@@ -66,20 +66,22 @@ namespace BaseProject.Factory
 
         public static void CloseDriver()
         {
-            IWebDriver driver = (IWebDriver)DriverStored;
+            var driverInstance = GetDriver();
+
             try
             {
-                driver.Close();
-                driver.Quit();
+                driverInstance.Quit();
             }
             catch (Exception e)
             {
                 Console.Write(e.Message);
-            }
-            finally
+            }finally
             {
-                KillBrowser();
-                DriverStored = null;
+
+                if (driverInstance.ToString().Contains("null"))
+                {
+                    KillBrowser();
+                }
             }
         }
 

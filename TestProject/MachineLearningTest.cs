@@ -49,5 +49,11 @@ namespace TestProject
             var titel = "Home Page";
             Assert.AreEqual(result, titel);
         }
+
+        [OneTimeTearDown]
+        public void TearDown()
+        {
+            GetDriver().Quit();
+        }
     }
 }
